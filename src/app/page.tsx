@@ -1,52 +1,50 @@
 'use client'
 
-import { useAccount, useConnect, useDisconnect, useBalance } from 'wagmi'
+import { useEffect, useState } from 'react'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { Address } from 'viem'
+import { getBalanceToken } from './utils/getTokenBalance'
+
 
 function App() {
   const account = useAccount()
-  const { connectors, connect, status, error } = useConnect()
+  const { connectors, connect } = useConnect()
   const { disconnect } = useDisconnect()
-  const { data } = useBalance({
-    address: account.address,
-  });
+  const [balanceToken, setBalanceToken] = useState(0);
+
+  useEffect(() => {
+    if (account.status === 'connected') {
+      fetchBalanceToken();
+    }
+  }, [account]);
+
+  const fetchBalanceToken = async () => {
+    if( account.chainId != 97 ) {
+      alert("Connect bsc testnet");
+    }
+    const balance = await getBalanceToken(account.address as Address);
+    setBalanceToken(balance); 
+  }
 
   return (
-    <>
+    <div>
       <div>
-        <h2>Account</h2>
-
-        <div>
-          status: {account.status}
-          <br />
-          address: {account.address}
-          <br />
-          balance: {data?.formatted}
-          <br />
-          chainId: {account.chainId}
-        </div>
-
-        {account.status === 'connected' && (
-          <button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </button>
-        )}
+        {
+          account.status === 'connected' ? (
+            <div>
+              <button onClick={() => disconnect()}>Disconnect</button>
+              <p>Address: {account.address} </p>
+              <p>Balance: {Number(balanceToken)} Token BW</p>
+              <p>ChainID: {account.chainId} </p>
+            </div>
+          ) : (
+            <div>
+              <button onClick={() => connect({ connector: connectors[0] })}>Connect</button>
+            </div>
+          )
+        }
       </div>
-
-      <div>
-        <h2>Connect</h2>
-        {connectors.map((connector) => (
-          <button
-            key={connector.uid}
-            onClick={() => connect({ connector })}
-            type="button"
-          >
-            {connector.name}
-          </button>
-        ))}
-        <div>{status}</div>
-        <div>{error?.message}</div>
-      </div>
-    </>
+    </div>
   )
 }
 

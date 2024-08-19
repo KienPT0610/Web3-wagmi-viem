@@ -5,8 +5,7 @@ import { type ReactNode, useState } from 'react'
 import { type State, WagmiProvider } from 'wagmi'
 
 import { getConfig } from '@/wagmi'
-import BalanceOf from './BalanceOf'
-import Transfer from './Transfer'
+import Home from './components/Home'
 
 export function Providers(props: {
   children: ReactNode
@@ -19,8 +18,8 @@ export function Providers(props: {
     <WagmiProvider config={config} initialState={props.initialState}>
       <QueryClientProvider client={queryClient}>
         {props.children}
-        <BalanceOf />
-        <Transfer />
+        <hr />
+        <Home /> 
       </QueryClientProvider>
     </WagmiProvider>
   )

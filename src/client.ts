@@ -1,6 +1,5 @@
 import { createPublicClient, createWalletClient, custom, http } from "viem";
 import { mainnet, bscTestnet, bsc } from "viem/chains";
-import 'viem/window';
 
 
 export const publicClient = createPublicClient({
@@ -8,8 +7,7 @@ export const publicClient = createPublicClient({
   transport: http(),
 });
 
-
 export const walletClient = createWalletClient({
     chain: bscTestnet,
-    transport: custom(window.ethereum),
+    transport: custom(window.ethereum), 
 });

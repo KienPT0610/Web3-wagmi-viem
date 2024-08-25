@@ -5,7 +5,7 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { Address } from 'viem'
 import { getBalanceToken } from './utils/getTokenBalance'
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 function App() {
   const account = useAccount()

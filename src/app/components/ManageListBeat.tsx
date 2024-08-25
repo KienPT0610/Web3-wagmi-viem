@@ -73,10 +73,12 @@ const ManageListBeat = () => {
                         <p> Title <b> {beat.title}</b> </p>
                         <p> Owner { beat.owner } </p>
                         <p> Price {Number(beat.price)} </p>
-                        <Controls src={"https://crimson-worried-lungfish-936.mypinata.cloud/ipfs/QmWSfYwr4ZoXz6s6ncCj5GA58A3aNS8DtaMJSch1VEPwG8"} />
+                        <Controls src={`https://crimson-worried-lungfish-936.mypinata.cloud/ipfs/${beat.cid}`} />
                         <button onClick={() => handleSaleBeat(beat.id)}> Sale Beat </button>
                         <button onClick={() => handleTransferOwner(beat.id)}> Transfer Owner </button>
                         <button onClick={() => handleChangeBeat(beat.id)}> Change Title </button>
+                        <button>Unlist Sale</button>
+                        <button>Dowload</button>
                     </div>
                 ))}
             </div>

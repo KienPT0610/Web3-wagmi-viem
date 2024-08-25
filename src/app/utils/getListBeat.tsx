@@ -1,12 +1,14 @@
 import { contractRead } from "./getContract";
+import { Beat } from "../types/Beat";
 
-interface Beat {
-    id: number;
-    title: string;
-    owner: string;
-    price: number;
-    isForSale: boolean;
-}
+// interface Beat {
+//     id: number;
+//     cid: string;
+//     title: string;
+//     owner: string;
+//     price: number;
+//     isForSale: boolean;
+// }
 
 export const getListBeat = async () => {
     const total = await contractRead.read.beatCountId();
@@ -16,7 +18,8 @@ export const getListBeat = async () => {
         const beat: any = await contractRead.read.beats([i]);
         const typeBeat: Beat = {
             id: i,
-            owner: beat[0],         
+            owner: beat[0],  
+            cid: beat[1],       
             title: beat[2],         
             price: Number(beat[3]), 
             isForSale: beat[4]

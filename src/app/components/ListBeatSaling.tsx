@@ -9,12 +9,12 @@ import { contract } from "../abi/contractAbi";
 
 const ListBeatSaling = () => {
 
-    const [beats, setBeats] = useState<Beat[]>([]);
+    const [beats, setBeats] = useState<Beat[]>([] as Beat[]);
     const account = useAccount();
 
     useEffect(() => {
         getListBeat().then((data) => {
-            setBeats(data);
+            setBeats(data); 
         });
     }, []);
 
@@ -50,7 +50,9 @@ const ListBeatSaling = () => {
                             <span>Title: {beat.title}</span><br />
                             <span>Owner: {beat.owner}</span><br />
                             <span>Price: {Number(beat.price)}</span><br />
-                            <button onClick={() => handleBuyBeat(beat.id, beat.price)}>BUY</button>
+                            <button onClick={() => handleBuyBeat(beat.id, beat.price)}>Buy</button>
+                            <button>Donate For Owner</button>
+                            <button>Favourit</button>
                         </div>
                     </div>
                 ))}

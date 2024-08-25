@@ -6,14 +6,8 @@ export const publicClient = createPublicClient({
   transport: http(),
 });
 
-let walletClient;
-if (typeof window !== 'undefined' && window.ethereum) {
-  walletClient = createWalletClient({
+export const walletClient = createWalletClient({
     chain: bscTestnet,
     transport: custom(window.ethereum),
   });
-} else {
-  console.error("Ethereum provider not found. Please install MetaMask or another Ethereum wallet.");
-}
 
-export { walletClient };

@@ -7,7 +7,7 @@ export const publicClient = createPublicClient({
 });
 
 export const walletClient = createWalletClient({
-    chain: bscTestnet,
-    transport: custom(window.ethereum),
-  });
+  chain: bscTestnet,
+  transport: custom(window.ethereum) || null,
+});
 

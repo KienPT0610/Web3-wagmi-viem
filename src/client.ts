@@ -1,9 +1,11 @@
 import { createPublicClient, createWalletClient, custom, http } from "viem";
 import { mainnet, bscTestnet, bsc } from "viem/chains";
 
-let transport = null;
+let transport = null; 
 if (typeof window !== 'undefined' && window.ethereum) {
   transport = custom(window.ethereum);
+} else {
+  transport = http()
 }
 
 export const publicClient = createPublicClient({
